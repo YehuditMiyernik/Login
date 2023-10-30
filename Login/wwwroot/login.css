@@ -1,0 +1,16 @@
+﻿#login {
+    direction:rtl;
+    margin-top: 100px;
+    margin-right:100px;
+}
+input {
+    margin-top: 10px;
+}
+
+lable {
+    margin-block-end: 100px
+}
+
+button {
+    margin-top: 10px;
+}

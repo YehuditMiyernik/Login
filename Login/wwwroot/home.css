@@ -1,0 +1,25 @@
+﻿#home {
+    direction: rtl;
+    margin-top: 100px;
+    margin-right: 100px;
+}
+
+input {
+    margin-top: 10px;
+    margin-bottom:10px
+}
+
+button {
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+img{
+    margin-right:200px;
+    width:50px;
+    height:50px;
+    border-style:groove;
+    border-color:black;
+    border-radius:20px;
+    border-width:5px
+}
