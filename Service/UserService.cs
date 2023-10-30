@@ -9,23 +9,28 @@ using Zxcvbn;
 
 namespace Service;
 
-public class UserService
+public class UserService : IUserService
 {
-    UserRepository userRepository = new UserRepository();
+    private readonly IUserRepository _userRepository;
+
+    public UserService(IUserRepository userRepository)
+    {
+        _userRepository = userRepository;
+    }
 
     public User GetUserByEmailAndPassword(string email, string password)
     {
-        return(userRepository.GetUserByEmailAndPassword(email, password));
+        return (_userRepository.GetUserByEmailAndPassword(email, password));
     }
 
     public User GetUserById(int id)
     {
-        return userRepository.GetUserById(id);
+        return _userRepository.GetUserById(id);
     }
 
     public User AddUser(User user)
     {
-        return userRepository.AddUser(user);
+        return _userRepository.AddUser(user);
     }
 
     public int CheckPassword(string password)
@@ -36,6 +41,6 @@ public class UserService
 
     public User UpdateUser(int id, User updatedUser)
     {
-        return userRepository.UpdateUser(id, updatedUser);
+        return _userRepository.UpdateUser(id, updatedUser);
     }
 }

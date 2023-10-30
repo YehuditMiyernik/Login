@@ -12,12 +12,17 @@ namespace MyFirstWebApi.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        UserService userService = new UserService();   
+        private readonly IUserService _userService;
+
+        public UsersController(IUserService userService)
+        {
+            _userService = userService;
+        }
         // GET: api/<UsersController>
         [HttpGet]
         public ActionResult<User> Get([FromQuery] string userName, [FromQuery] string password)
         {
-            User user = userService.GetUserByEmailAndPassword(userName, password);
+            User user = _userService.GetUserByEmailAndPassword(userName, password);
             if(user == null)
                 return NoContent();
             return Ok(user);     
@@ -27,7 +32,7 @@ namespace MyFirstWebApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<User> Get(int id)
         {
-            User user = userService.GetUserById(id);
+            User user = _userService.GetUserById(id);
             if(user == null) 
                 return NoContent(); 
             return Ok(user);
@@ -39,7 +44,7 @@ namespace MyFirstWebApi.Controllers
         {
             try
             {
-                User newUser = userService.AddUser(user);
+                User newUser = _userService.AddUser(user);
                 return CreatedAtAction(nameof(Get), new { id = newUser.Id }, user);
             }
             catch (Exception ex)
@@ -52,7 +57,7 @@ namespace MyFirstWebApi.Controllers
         [HttpPost]
         public ActionResult<int> Post([FromBody] string password)
         {
-            int res = userService.CheckPassword(password);
+            int res = _userService.CheckPassword(password);
             if (res <= 2)
                 return BadRequest(res);
             return Ok(res);
@@ -62,7 +67,7 @@ namespace MyFirstWebApi.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] User updatedUser)
         {
-            User user = userService.UpdateUser(id, updatedUser);
+            User user = _userService.UpdateUser(id, updatedUser);
             if(user == null) 
                 return NoContent();
             return Ok(); 

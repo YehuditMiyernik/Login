@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Repository;
 
-public class UserRepository
+public class UserRepository : IUserRepository
 {
     private readonly string filePath = "./users.txt";
     public User GetUserByEmailAndPassword(string email, string password)
@@ -27,7 +27,7 @@ public class UserRepository
         return null;
     }
 
-    public User GetUserById(int id) 
+    public User GetUserById(int id)
     {
         using (StreamReader reader = System.IO.File.OpenText(filePath))
         {
