@@ -70,8 +70,6 @@ const checkPassword = async () => {
                 body: JSON.stringify(password)
             });
         console.log(res);
-        if (!res.ok)
-            throw new Error("Error checking password")
         const score = await res.json();
         const progress = document.getElementById("progress")
         progress.value = score;
