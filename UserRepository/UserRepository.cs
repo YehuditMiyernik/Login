@@ -12,12 +12,12 @@ namespace Repository;
 public class UserRepository : IUserRepository
 {
     private readonly string filePath = "./users.txt";
-    public User GetUserByEmailAndPassword(string email, string password)
+    public async Task<User> GetUserByEmailAndPassword(string email, string password)
     {
         using (StreamReader reader = System.IO.File.OpenText(filePath))
         {
             string? currentUserInFile;
-            while ((currentUserInFile = reader.ReadLine()) != null)
+            while ((currentUserInFile = await reader.ReadLineAsync()) != null)
             {
                 User user = JsonSerializer.Deserialize<User>(currentUserInFile);
                 if (user.UserName == email && user.Password == password)
@@ -27,12 +27,12 @@ public class UserRepository : IUserRepository
         return null;
     }
 
-    public User GetUserById(int id)
+    public async Task<User> GetUserById(int id)
     {
         using (StreamReader reader = System.IO.File.OpenText(filePath))
         {
             string currentUserInFile;
-            while ((currentUserInFile = reader.ReadLine()) != null)
+            while ((currentUserInFile = await reader.ReadLineAsync()) != null)
             {
                 User user = JsonSerializer.Deserialize<User>(currentUserInFile);
                 if (user.Id == id)
@@ -51,13 +51,13 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public User UpdateUser(int id, User updatedUser)
+    public async Task<User> UpdateUser(int id, User updatedUser)
     {
         string textToReplace = string.Empty;
         using (StreamReader reader = System.IO.File.OpenText(filePath))
         {
             string currentUserInFile;
-            while ((currentUserInFile = reader.ReadLine()) != null)
+            while ((currentUserInFile = await reader.ReadLineAsync()) != null)
             {
 
                 User user = JsonSerializer.Deserialize<User>(currentUserInFile);
@@ -67,9 +67,9 @@ public class UserRepository : IUserRepository
         }
         if (textToReplace != string.Empty)
         {
-            string text = System.IO.File.ReadAllText(filePath);
+            string text = await System.IO.File.ReadAllTextAsync(filePath);
             text = text.Replace(textToReplace, JsonSerializer.Serialize(updatedUser));
-            System.IO.File.WriteAllText(filePath, text);
+            await System.IO.File.WriteAllTextAsync(filePath, text);
             return updatedUser;
         }
         return null;

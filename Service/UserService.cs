@@ -18,14 +18,14 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public User GetUserByEmailAndPassword(string email, string password)
+    public async Task<User> GetUserByEmailAndPassword(string email, string password)
     {
-        return (_userRepository.GetUserByEmailAndPassword(email, password));
+        return await _userRepository.GetUserByEmailAndPassword(email, password);
     }
 
-    public User GetUserById(int id)
+    public async Task<User> GetUserById(int id)
     {
-        return _userRepository.GetUserById(id);
+        return await _userRepository.GetUserById(id);
     }
 
     public User AddUser(User user)
@@ -33,14 +33,14 @@ public class UserService : IUserService
         return _userRepository.AddUser(user);
     }
 
-    public int CheckPassword(string password)
+    public async Task<int> CheckPassword(string password)
     {
         var result = Zxcvbn.Core.EvaluatePassword(password);
         return result.Score;
     }
 
-    public User UpdateUser(int id, User updatedUser)
+    public async Task<User> UpdateUser(int id, User updatedUser)
     {
-        return _userRepository.UpdateUser(id, updatedUser);
+        return await _userRepository.UpdateUser(id, updatedUser);
     }
 }

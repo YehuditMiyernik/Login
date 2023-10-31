@@ -20,9 +20,9 @@ namespace MyFirstWebApi.Controllers
         }
         // GET: api/<UsersController>
         [HttpGet]
-        public ActionResult<User> Get([FromQuery] string userName, [FromQuery] string password)
+        public async Task<ActionResult<User>> Get([FromQuery] string userName, [FromQuery] string password)
         {
-            User user = _userService.GetUserByEmailAndPassword(userName, password);
+            User user = await _userService.GetUserByEmailAndPassword(userName, password);
             if(user == null)
                 return NoContent();
             return Ok(user);     
@@ -30,11 +30,11 @@ namespace MyFirstWebApi.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public ActionResult<User> Get(int id)
+        public async Task<ActionResult<User>> Get(int id)
         {
-            User user = _userService.GetUserById(id);
-            if(user == null) 
-                return NoContent(); 
+            User user = await _userService.GetUserById(id);
+            if (user == null)
+                return NoContent();
             return Ok(user);
         }
 
@@ -55,9 +55,9 @@ namespace MyFirstWebApi.Controllers
 
         [Route("pwd")]
         [HttpPost]
-        public ActionResult<int> Post([FromBody] string password)
+        public async Task<ActionResult<int>> Post([FromBody] string password)
         {
-            int res = _userService.CheckPassword(password);
+            int res = await _userService.CheckPassword(password);
             if (res <= 2)
                 return BadRequest(res);
             return Ok(res);
@@ -65,9 +65,9 @@ namespace MyFirstWebApi.Controllers
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] User updatedUser)
+        public async Task<ActionResult> Put(int id, [FromBody] User updatedUser)
         {
-            User user = _userService.UpdateUser(id, updatedUser);
+            User user = await _userService.UpdateUser(id, updatedUser);
             if(user == null) 
                 return NoContent();
             return Ok(); 
