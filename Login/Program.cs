@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddDbContext<Store325574630Context>(options => options.UseSqlServer("Data Source=DESKTOP-E0FAPSB\\SQLEXPRESS;Initial Catalog=Store325574630;Integrated Security=True"));
 
 var app = builder.Build();
 

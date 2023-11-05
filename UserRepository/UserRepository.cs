@@ -1,8 +1,9 @@
-﻿using Entities;
+﻿using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -11,7 +12,14 @@ namespace Repository;
 
 public class UserRepository : IUserRepository
 {
-    private readonly string filePath = "./users.txt";
+    private readonly Store325574630Context _Store325574630Context;
+    public UserRepository()
+    {
+        _Store325574630Context = new Store325574630Context();
+    }
+
+    private string filePath = "/";
+
     public async Task<User> GetUserByEmailAndPassword(string email, string password)
     {
         using (StreamReader reader = System.IO.File.OpenText(filePath))
@@ -20,7 +28,7 @@ public class UserRepository : IUserRepository
             while ((currentUserInFile = await reader.ReadLineAsync()) != null)
             {
                 User user = JsonSerializer.Deserialize<User>(currentUserInFile);
-                if (user.UserName == email && user.Password == password)
+                //if (user.UserName == email && user.Password == password)
                     return user;
             }
         }
@@ -42,12 +50,10 @@ public class UserRepository : IUserRepository
         }
     }
 
-    public User AddUser(User user)
+    public async Task<User> AddUser(User user)
     {
-        int numberOfUsers = System.IO.File.ReadLines(filePath).Count();
-        user.Id = numberOfUsers + 1;
-        string userJson = JsonSerializer.Serialize(user);
-        System.IO.File.AppendAllText(filePath, userJson + Environment.NewLine);
+        await _Store325574630Context.AddAsync(user);
+        await _Store325574630Context.SaveChangesAsync();
         return user;
     }
 

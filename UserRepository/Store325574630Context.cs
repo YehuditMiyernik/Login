@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Repository.Models;
+namespace Repository;
 
 public partial class Store325574630Context : DbContext
 {
@@ -24,13 +24,13 @@ public partial class Store325574630Context : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=srv2\\pupils;Database=Store_325574630;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-E0FAPSB\\SQLEXPRESS;Database=Store325574630;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Category__3214EC074246D04C");
+            entity.HasKey(e => e.Id).HasName("PK__Category__3214EC074FB454CD");
 
             entity.ToTable("Category");
 
@@ -41,7 +41,7 @@ public partial class Store325574630Context : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Products__3214EC07569226C8");
+            entity.HasKey(e => e.Id).HasName("PK__Products__3214EC07AEACFBC0");
 
             entity.Property(e => e.Description)
                 .HasMaxLength(200)
@@ -60,12 +60,15 @@ public partial class Store325574630Context : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC0706AD93EE");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07328E97AF");
 
             entity.Property(e => e.LastName)
                 .HasMaxLength(20)
                 .IsFixedLength();
             entity.Property(e => e.Name)
+                .HasMaxLength(20)
+                .IsFixedLength();
+            entity.Property(e => e.Password)
                 .HasMaxLength(20)
                 .IsFixedLength();
             entity.Property(e => e.UserName)

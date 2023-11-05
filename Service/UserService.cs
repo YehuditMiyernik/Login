@@ -1,4 +1,4 @@
-﻿using Entities;
+﻿using Entities.Models;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -28,9 +28,9 @@ public class UserService : IUserService
         return await _userRepository.GetUserById(id);
     }
 
-    public User AddUser(User user)
+    public async Task<User>  AddUser(User user)
     {
-        return _userRepository.AddUser(user);
+        return await _userRepository.AddUser(user);
     }
 
     public async Task<int> CheckPassword(string password)

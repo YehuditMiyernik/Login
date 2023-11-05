@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
 using Service;
@@ -40,11 +41,11 @@ namespace MyFirstWebApi.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public ActionResult<User> Post([FromBody] User user)
+        public async Task<ActionResult<User>> Post([FromBody] User user)
         {
             try
             {
-                User newUser = _userService.AddUser(user);
+                User newUser = await _userService.AddUser(user);
                 return CreatedAtAction(nameof(Get), new { id = newUser.Id }, user);
             }
             catch (Exception ex)
