@@ -18,4 +18,6 @@ public partial class Product
     public string Description { get; set; } = null!;
 
     public virtual Category? Category { get; set; }
+
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 }

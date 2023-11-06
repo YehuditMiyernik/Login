@@ -15,10 +15,11 @@ public partial class User
     [Required]
     public string Password { get; set; } = null!;
 
-    [Required]
-    [StringLength(8, ErrorMessage = "Name can't be longer then 8.")]
+    [StringLength(20, ErrorMessage = "Name can't be longer then 20.")]
     public string Name { get; set; } = null!;
 
-    [StringLength(8, ErrorMessage = "Last name can't be longer then 8.")]
+    [StringLength(20, ErrorMessage = "last name can't be longer then 20.")]
     public string LastName { get; set; } = null!;
+
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

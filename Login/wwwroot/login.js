@@ -55,6 +55,7 @@ const register = async () => {
         alert(`${created.id} was created`);
     } catch (ex) {
         alert(ex.message);
+        throw new Error("Error adding user to server")
     }
 }
 
