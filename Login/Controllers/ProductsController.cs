@@ -18,9 +18,12 @@ namespace MyFirstWebApi.Controllers
         }
         // GET: api/<ProductsController>
         [HttpGet]
-        public async Task<List<Product>> Get()
+        public async Task<ActionResult<List<Product>>> Get()
         {
-            return await _productrService.GetAllProducts();
+            List<Product> list = await _productrService.GetAllProducts();
+            if (list == null)
+                return NoContent();
+            return Ok(list);
         }
 
         // GET api/<ProductsController>/5

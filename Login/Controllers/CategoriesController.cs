@@ -18,9 +18,12 @@ namespace MyFirstWebApi.Controllers
         }
         // GET: api/<CategoriesController>
         [HttpGet]
-        public async Task<List<Category>> Get()
+        public async Task<ActionResult<List<Category>>> Get()
         {
-            return await _categoryService.getAllCategories();
+            List<Category> list = await _categoryService.getAllCategories();
+            if (list == null)
+                return NoContent();
+            return Ok(list);
         }
 
         // GET api/<CategoriesController>/5

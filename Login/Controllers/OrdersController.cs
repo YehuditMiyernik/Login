@@ -34,7 +34,15 @@ namespace MyFirstWebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Order>> Post([FromBody] Order order)
         {
-            return await _orderService.AddOrder(order);
+            try
+            {
+                Order ord = await _orderService.AddOrder(order);
+                return CreatedAtAction(nameof(Get), new { id = ord.OrderId }, order);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<OrdersController>/5
