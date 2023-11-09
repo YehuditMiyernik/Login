@@ -73,11 +73,5 @@ namespace MyFirstWebApi.Controllers
                 return NoContent();
             return Ok(); 
         }
-
-        // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

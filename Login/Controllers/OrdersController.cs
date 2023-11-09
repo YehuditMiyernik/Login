@@ -16,12 +16,6 @@ namespace MyFirstWebApi.Controllers
         {
             _orderService = orderService;
         }
-        // GET: api/<OrdersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
         // GET api/<OrdersController>/5
         [HttpGet("{id}")]
@@ -43,18 +37,6 @@ namespace MyFirstWebApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // PUT api/<OrdersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<OrdersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
