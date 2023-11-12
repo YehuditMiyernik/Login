@@ -3,20 +3,21 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <script src="home.js"></script>
-    <link rel="stylesheet" href="home.css"/>
+    <script src="./Scripts/home.js"></script>
+    <link rel="stylesheet" href="./Style/home.css"/>
 </head>
 <body onload="loadHomePage()">
     <div id="home">
-        <img src="./vi.jpg" />
+        <img src="./Images/vi.jpg" />
         <h1 id="welcome"></h1>
         <button onclick="showUpdateUser()">עדכון</button>
+        <button onclick="window.location.href = './Products.html'">To the product page</button>
         <div id="update" style="visibility:hidden">
             <label for="userName">שם משתמש</label><br />
             <input id="userName" />
             <br />
             <label for="password">סיסמה</label><br />
-            <input id="password" type="password"/>
+            <input id="password" type="password" />
             <br />
             <label for="name">שם</label><br />
             <input id="name" />
