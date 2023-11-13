@@ -15,7 +15,7 @@ public class ProductRepository : IProductRepository
     {
         _Store325574630Context = new Store325574630Context();
     }
-    public async Task<List<Product>> GetAllProducts(int? position, int? skip, string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
+    public async Task<List<Product>> GetAllProducts(string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
     {
         var query = _Store325574630Context.Products.Where(product =>
         (desc == null ? (true) : (product.Description.Contains(desc)))

@@ -1,25 +1,65 @@
-﻿#home {
-    direction: rtl;
-    margin-top: 100px;
-    margin-right: 100px;
+﻿body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f2f2f2;
+}
+
+h1 {
+    color: #333;
+    margin-top: 30px;
+    font-size: x-large;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 input {
-    margin-top: 10px;
-    margin-bottom:10px
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 button {
-    margin-top: 10px;
-    margin-bottom: 10px
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+a {
+    color: #333;
+    text-decoration: underline;
 }
 
 img{
-    margin-right:200px;
-    width:50px;
-    height:50px;
-    border-style:groove;
-    border-color:black;
-    border-radius:20px;
-    border-width:5px
+    width: 200px;
+}
+
+#login {
+    margin: 50px auto;
+    width: 450px;
+    height: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#register {
+    margin-top: 20px;
+}
+
+    #register input {
+        margin-top: 5px;
+    }
+
+progress {
+    width: 70%;
+    margin-top: 10px;
 }

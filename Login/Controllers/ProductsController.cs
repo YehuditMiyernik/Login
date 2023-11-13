@@ -18,9 +18,9 @@ namespace MyFirstWebApi.Controllers
         }
         // GET: api/<ProductsController>
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> Get(int? position, int? skip, string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
+        public async Task<ActionResult<List<Product>>> Get([FromQuery] string? desc, [FromQuery] int? minPrice, [FromQuery] int? maxPrice, [FromQuery] int?[] categoryIds)
         {
-            List<Product> list = await _productrService.GetAllProducts(position, skip, desc, minPrice, maxPrice, categoryIds);
+            List<Product> list = await _productrService.GetAllProducts(desc, minPrice, maxPrice, categoryIds);
             if (list == null)
                 return NoContent();
             return Ok(list);

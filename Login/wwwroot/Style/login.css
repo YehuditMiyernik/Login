@@ -1,16 +1,60 @@
-﻿#login {
-    direction:rtl;
-    margin-top: 100px;
-    margin-right:100px;
-}
-input {
-    margin-top: 10px;
+﻿body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f2f2f2;
 }
 
-lable {
-    margin-block-end: 100px
+h1 {
+    color: #333;
+    margin-top: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+a {
+    color: #333;
+    text-decoration: underline;
+}
+
+#login {
+    margin: 50px auto;
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#register {
+    margin-top: 20px;
+}
+
+    #register input {
+        margin-top: 5px;
+    }
+
+progress {
+    width: 70%;
     margin-top: 10px;
 }
