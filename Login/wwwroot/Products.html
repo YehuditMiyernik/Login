@@ -2,8 +2,7 @@
 <html>
 <head>
     <script src="./Scripts/Products.js"></script>
-    <link href="../Style/Products.css" rel="stylesheet" />
-
+    <link href="./Style/Products.css" rel="stylesheet" />
     <meta charset="utf-8" />
     <title></title>
     <template id="temp-card">
@@ -19,7 +18,7 @@
     </template>
     <template id="temp-category">
         <div class="cb checkbox">
-            <input type="checkbox" class="opt" id="" value="" onclick="sendToFilter(this)">
+            <input type="checkbox" onclick="filterProducts()" class="opt" id="" value="">
             <label for="">
                 <span class="OptionName"></span>
                 <span class="Count"></span>
@@ -32,17 +31,16 @@
     <header>
         <div class="bar">
 
-
             <section class="QuickLinks">
                 <ul>
                     <li class="" data-section="myAccount">
-                        <a href="#" title="כניסה לצפייה בפרטי החשבון"  onclick="TrackLinkID(this);"  accesskey="h">החשבון שלי</a>
+                        <a href="#" title="כניסה לצפייה בפרטי החשבון" onclick="TrackLinkID(this);" accesskey="h">החשבון שלי</a>
                     </li>
                     <li>
                         <a href="#" title="קניה מהירה">קניה מהירה</a>
                     </li>
                     <li>
-                        <a href="#" title="עזרה - שאלות נפוצות, כיצד לקנות באינטרנט, מדריך ועוד"  target="_blank">עזרה</a>
+                        <a href="#" title="עזרה - שאלות נפוצות, כיצד לקנות באינטרנט, מדריך ועוד" target="_blank">עזרה</a>
                     </li>
                 </ul>
             </section>
@@ -54,7 +52,6 @@
                             <span id="ItemsCountText">0</span>
                         </div>
                     </div>
-
                 </a>
             </span>
             <div class="Checkout ">
@@ -72,7 +69,6 @@
 
             <div>
                 <span id="counter">
-
                 </span>
             </div>
         </div>
@@ -103,12 +99,12 @@
     </div>
 
     <div id="ProductList">
-
     </div>
+
     <div class="pagination">
         <a href="#">&laquo;</a>
         <div id="pages"></div>
         <a href="#">&raquo;</a>
-    </
+    </div>
 </body>
 </html>

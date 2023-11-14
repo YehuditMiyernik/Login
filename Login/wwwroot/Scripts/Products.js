@@ -1,7 +1,7 @@
 ﻿const loadProductsPage = async () => {
     const categories = await getCategories();
     displayCategories(categories);
-    const products = await getProducts();
+    const products = await getProducts("");
     displayProducts(products);
 }
 
@@ -23,13 +23,6 @@ const getCategories = async () => {
     }
 }
 
-//const sendToFilter = (checkBox) => {
-//    if (checkBox.checked) {
-//        console.log(checkBox.value);
-//        generateUrl(checkBox.value);
-//    }
-//}
-
 const displayCategories = (categories) => {
     const template = document.getElementById("temp-category").content;
     const container = document.getElementById("categoryList");
@@ -48,7 +41,7 @@ const displayCategories = (categories) => {
 
 const getProducts = async (url) => {
     try {
-        const res = await fetch(`api/Products`,
+        const res = await fetch('api/Products'+url,
             {
                 method: 'GET',
                 headers: {
@@ -65,10 +58,11 @@ const getProducts = async (url) => {
 }
 
 const displayProducts = (products) => {
+    let min = 1000000;
+    let max = 0;
     const template = document.getElementById("temp-card").content;
-/*    const ProductList = document.getElementById("ProductList").content;*/
-/*    ProductList.appendChild()*/
-    console.log(products);
+    const ProductList = document.getElementById("ProductList");
+    ProductList.replaceChildren();
     products.forEach(product => {
         const clone = template.cloneNode(true);
         const image = clone.querySelector("img");
@@ -77,26 +71,36 @@ const displayProducts = (products) => {
         const description = clone.querySelector(".description");
         image.src = "./Images/" + product.prodImage;
         h1.textContent = product.prodName;
-        price.textContent = product.price +" ₪";
+        price.textContent = product.price + " ₪";
         description.textContent = product.description;
-/*        ProductList.appendChild(clone);*/
-        document.body.appendChild(clone);
+        ProductList.appendChild(clone);
+        if (product.price > max)
+            max = product.price;
+        else
+            if (product.price < min)
+                min = product.price;
     });
+    const minPrice = document.getElementById("minPrice");
+    minPrice.placeholder = min;
+    const maxPrice = document.getElementById("maxPrice");
+    maxPrice.placeholder = max;
+    const counter = document.getElementById("counter");
+    counter.innerHTML = products.length;
 }
 
-const filterProducts = () => {
+const filterProducts = async () => {
+    const checkboxArray = document.getElementsByClassName("opt");
+    const desc = document.getElementById("nameSearch").value;
+    const minPrice = document.getElementById("minPrice").value;
+    const maxPrice = document.getElementById("maxPrice").value;
+    let url = "?desc=" + desc + "&minPrice=" + minPrice + "&maxPrice=" + maxPrice;
 
-}
-
-const generateUrl = (desc, minPrice, maxPrice, categoryIds) => {
-    const url = "";
-    if (desc)
-        url += "/" + desc;
-    if (minPrice)
-        url += "/" + minPrice;
-    if (maxPrice)
-        url += "/" + maxPrice;
-    //if (categoryIds)
-    console.log(url);
-    //getProducts(url);
+    for (let i = 0; i < checkboxArray.length; i++) {
+        if (checkboxArray[i].checked) {
+            url += "&categoryIds=" + checkboxArray[i].id;
+        }
+    }
+    const products = await getProducts(url);
+    console.log(products);
+    displayProducts(products);
 }
