@@ -2,10 +2,8 @@
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
-using Service;
+using Services;
 using System.Text.Json;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MyFirstWebApi.Controllers
 {
@@ -19,7 +17,7 @@ namespace MyFirstWebApi.Controllers
         {
             _userService = userService;
         }
-        // GET: api/<UsersController>
+
         [HttpGet]
         public async Task<ActionResult<User>> Get([FromQuery] string userName, [FromQuery] string password)
         {
@@ -29,7 +27,6 @@ namespace MyFirstWebApi.Controllers
             return Ok(user);     
         }
 
-        // GET api/<UsersController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> Get(int id)
         {
@@ -39,18 +36,21 @@ namespace MyFirstWebApi.Controllers
             return Ok(user);
         }
 
-        // POST api/<UsersController>
         [HttpPost]
         public async Task<ActionResult<User>> Post([FromBody] User user)
         {
             try
             {
                 User newUser = await _userService.AddUser(user);
+                if(newUser == null)
+                {
+                    return BadRequest();
+                }
                 return CreatedAtAction(nameof(Get), new { id = newUser.Id }, user);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(500);
             }
         }
 
@@ -64,14 +64,13 @@ namespace MyFirstWebApi.Controllers
             return Ok(res);
         }
 
-        // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] User updatedUser)
+        public async Task<ActionResult> Put(int id, [FromBody] User userToUpdate)
         {
-            User user = await _userService.UpdateUser(id, updatedUser);
+            User user = await _userService.UpdateUser(id, userToUpdate);
             if(user == null) 
                 return NoContent();
-            return Ok(); 
+            return  Ok(user); 
         }
     }
 }

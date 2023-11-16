@@ -1,4 +1,4 @@
-﻿const showRegister = () => {
+﻿const showRegisterForm = () => {
     const register = document.getElementById("register")
     register.style.visibility = "initial"
 }
@@ -15,11 +15,16 @@ const login = async () => {
                     'Content-Type': 'application/json'
                 },
             });
-        if (!res.ok)
+        if (!res.ok) {
+            if (res.status == 401)
+                alert("userName or password are invalid");
             throw new Error("wrong name or password!")
-        const user = await res.json();
-        sessionStorage.setItem('user', JSON.stringify(user));
-        window.location.href = "./home.html";
+        }
+        else {
+            const user = await res.json();
+            sessionStorage.setItem('user', JSON.stringify(user));
+            window.location.href = "./home.html";
+        }
     } catch (ex) {
         alert(ex.message);
     }

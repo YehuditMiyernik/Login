@@ -1,7 +1,7 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Service
+namespace Services
 {
     public interface ICategoryService
     {

@@ -1,13 +1,13 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
+using Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service;
+namespace Services;
 
 public class CategoryService : ICategoryService
 {

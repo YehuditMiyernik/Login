@@ -1,6 +1,6 @@
 ﻿using Entities.Models;
 
-namespace Service
+namespace Services
 {
     public interface IProductService
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Repository;
+namespace Repositories;
 
 public partial class Store325574630Context : DbContext
 {

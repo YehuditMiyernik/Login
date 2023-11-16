@@ -1,7 +1,7 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Repository
+namespace Repositories
 {
     public interface ICategoryRepository
     {

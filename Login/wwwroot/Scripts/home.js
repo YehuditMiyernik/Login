@@ -47,4 +47,5 @@ const updateUser = async () => {
     } catch (ex){
         alert(ex.message)
     }
+
 }

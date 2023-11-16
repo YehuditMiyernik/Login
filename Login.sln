@@ -5,11 +5,11 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFirstWebApi", "Login\MyFirstWebApi.csproj", "{6D52895D-E1AB-43C1-8BFD-74D93E3FF079}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{7661C523-7FCC-4598-A37E-3116DFCF076A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{7661C523-7FCC-4598-A37E-3116DFCF076A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "UserRepository\Repository.csproj", "{A3609A12-C9A2-4FAE-9814-14618641E773}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "UserRepository\Repositories.csproj", "{A3609A12-C9A2-4FAE-9814-14618641E773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{86344E00-01DB-452D-A558-1578D193BF31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Service\Services.csproj", "{86344E00-01DB-452D-A558-1578D193BF31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

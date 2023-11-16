@@ -1,8 +1,6 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using Service;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Services;
 
 namespace MyFirstWebApi.Controllers
 {
@@ -16,7 +14,7 @@ namespace MyFirstWebApi.Controllers
         {
             _categoryService = categoryService;
         }
-        // GET: api/<CategoriesController>
+
         [HttpGet]
         public async Task<ActionResult<List<Category>>> Get()
         {

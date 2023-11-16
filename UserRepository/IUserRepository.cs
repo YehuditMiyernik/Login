@@ -1,6 +1,6 @@
 ﻿using Entities.Models;
 
-namespace Repository
+namespace Repositories
 {
     public interface IUserRepository
     {

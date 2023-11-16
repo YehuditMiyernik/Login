@@ -69,6 +69,8 @@ const displayProducts = (products) => {
         const h1 = clone.querySelector("h1");
         const price = clone.querySelector(".price");
         const description = clone.querySelector(".description");
+        const btn = clone.querySelector("button");
+        btn.addEventListener('click', addToCart);
         image.src = "./Images/" + product.prodImage;
         h1.textContent = product.prodName;
         price.textContent = product.price + " ₪";
@@ -76,9 +78,8 @@ const displayProducts = (products) => {
         ProductList.appendChild(clone);
         if (product.price > max)
             max = product.price;
-        else
-            if (product.price < min)
-                min = product.price;
+        if (product.price < min)
+            min = product.price;
     });
     const minPrice = document.getElementById("minPrice");
     minPrice.placeholder = min;
@@ -103,4 +104,10 @@ const filterProducts = async () => {
     const products = await getProducts(url);
     console.log(products);
     displayProducts(products);
+}
+
+const addToCart = (product) => {
+    sessionStorage.setItem(JSON.stringify(product.id), JSON.stringify(product));
+    document.getElementById("ItemsCountText").innerHTML++;
+    
 }
