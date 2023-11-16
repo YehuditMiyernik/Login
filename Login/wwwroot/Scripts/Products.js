@@ -70,7 +70,10 @@ const displayProducts = (products) => {
         const price = clone.querySelector(".price");
         const description = clone.querySelector(".description");
         const btn = clone.querySelector("button");
-        btn.addEventListener('click', addToCart);
+        btn.addEventListener('click', () => {
+            const prod = product;
+            addToCart(prod);
+        }); 
         image.src = "./Images/" + product.prodImage;
         h1.textContent = product.prodName;
         price.textContent = product.price + " ₪";
@@ -109,5 +112,4 @@ const filterProducts = async () => {
 const addToCart = (product) => {
     sessionStorage.setItem(JSON.stringify(product.id), JSON.stringify(product));
     document.getElementById("ItemsCountText").innerHTML++;
-    
 }
