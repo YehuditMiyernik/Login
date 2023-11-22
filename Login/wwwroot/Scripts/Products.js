@@ -110,6 +110,5 @@ const filterProducts = async () => {
 }
 
 const addToCart = (product) => {
-    sessionStorage.setItem(JSON.stringify(product.id), JSON.stringify(product));
     document.getElementById("ItemsCountText").innerHTML++;
 }
