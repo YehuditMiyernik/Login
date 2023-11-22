@@ -1,8 +1,14 @@
-﻿const loadProductsPage = async () => {
+﻿let productsInCart = [];
+
+const loadProductsPage = async () => {
     const categories = await getCategories();
     displayCategories(categories);
     const products = await getProducts("");
     displayProducts(products);
+    const product = sessionStorage.getItem("productsInCart");
+    const productJson = JSON.parse(product);
+    document.getElementById("ItemsCountText").innerHTML = productJson.length;
+    productsInCart = productJson;
 }
 
 const getCategories = async () => {
@@ -105,10 +111,11 @@ const filterProducts = async () => {
         }
     }
     const products = await getProducts(url);
-    console.log(products);
     displayProducts(products);
 }
 
 const addToCart = (product) => {
     document.getElementById("ItemsCountText").innerHTML++;
+    productsInCart.push(product);
+    sessionStorage.setItem("productsInCart", JSON.stringify(productsInCart));
 }

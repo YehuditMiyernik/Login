@@ -46,7 +46,7 @@ namespace MyFirstWebApi.Controllers
                 {
                     return BadRequest();
                 }
-                return CreatedAtAction(nameof(Get), new { id = newUser.Id }, user);
+                return CreatedAtAction(nameof(Get), new { id = newUser.Id }, newUser);
             }
             catch (Exception ex)
             {

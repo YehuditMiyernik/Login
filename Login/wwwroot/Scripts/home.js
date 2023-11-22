@@ -25,14 +25,14 @@ const updateUser = async () => {
         const password = document.getElementById("password").value
         const name = document.getElementById("name").value
         const lastName = document.getElementById("lastName").value
-        const Id = jsonUser.id
+        const id = jsonUser.id
         //const progress = document.getElementById("progress").value
 
         //if (progress < 3) {
         //    throw new Error("try another password")
         //}
 
-        const user = { Id, userName, password, name, lastName }
+        const user = { id, userName, password, name, lastName }
 
         const res = await fetch(`/api/users/${Id}`, {
             method: 'PUT',
