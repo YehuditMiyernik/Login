@@ -25,7 +25,7 @@ const updateUser = async () => {
         const password = document.getElementById("password").value
         const name = document.getElementById("name").value
         const lastName = document.getElementById("lastName").value
-        const id = jsonUser.id
+        const Id = jsonUser.id
         //const progress = document.getElementById("progress").value
 
         //if (progress < 3) {
@@ -41,10 +41,17 @@ const updateUser = async () => {
             },
             body: JSON.stringify(user)
         });
+
+]//check response's status- if status==401 alert(userName or password are invalid)
+//if status==400 model validation error... etc
+//If (res.status == 200) save the new user details in SessionStorage
+// and   alert a suitable message
+//alert instead of throwing an error
         if (!res.ok)
             throw new Error("failed to update")
         window.location.href = "./login.html"
-    } catch (ex){
+    } catch (ex) {
+        //Exceptions you should log to the console (or to a special error file) it is not nice to alert the exceptions. 
         alert(ex.message)
     }
 
