@@ -18,6 +18,7 @@ builder.Services.AddTransient<IOrderService, OrderService>();
 builder.Services.AddDbContext<Store325574630Context>(options => options.UseSqlServer("Data Source=DESKTOP-E0FAPSB\\SQLEXPRESS;Initial Catalog=Store325574630;Integrated Security=True"));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
