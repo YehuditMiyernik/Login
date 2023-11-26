@@ -44,7 +44,7 @@ namespace MyFirstWebApi.Controllers
                 User newUser = await _userService.AddUser(user);
                 if(newUser == null)
                 {
-                    return BadRequest();
+                    return StatusCode(500);
                 }
                 return CreatedAtAction(nameof(Get), new { id = newUser.Id }, user);
             }
