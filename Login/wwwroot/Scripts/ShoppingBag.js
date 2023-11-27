@@ -55,7 +55,15 @@ const placeOrder = () => {
 const createOrder = async () => {
     const orders = JSON.parse(sessionStorage.getItem("productsInCart"));
     let orderSum = 0;
-    orders.forEach(p => orderSum += p.price);
+    orders.forEach(p => {
+        orderSum += p.price
+        let prod = document.getElementById(item.id);
+        let quantity = prod.querySelector('.quantity').innerHTML;
+        let productId = item.id;
+        let orderItem = { productId, quantity };
+
+        orderItems.push(orderItem);
+    });
     const userId = JSON.parse(sessionStorage.getItem("user")).id;
     const orderDate = new Date();
     const order = { orderDate, orderSum, userId }
@@ -73,7 +81,31 @@ const createOrder = async () => {
             throw new Error("Error place order")
         const created = await res.json();
         console.log(created);
+    //    saveProductsInDB(created.OrderId, orderItems);
     } catch (ex) {
         alert(ex.message);
     }
 }
+
+//saveProductsInDB = async (orderId, orderItems) => {
+//    orderItems.forEach(p => {
+//        p = {p.qu, p.pr, orderId}
+//    });
+//    try {
+//        const res = await fetch('/api/ordersItems',
+//            {
+//                method: 'POST',
+//                headers: {
+//                    'Content-Type': 'application/json'
+//                },
+//                body: products
+//            });
+//        if (!res.ok)
+//            throw new Error("Error save items")
+//        //const created = await res.json();
+//        //console.log(created);
+//        saveProductsInDB();
+//    } catch (ex) {
+//        alert(ex.message);
+//    }
+//}

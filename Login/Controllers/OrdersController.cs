@@ -31,8 +31,9 @@ namespace MyFirstWebApi.Controllers
             try
             {
                 Order o = _mapper.Map<OrderDTO, Order>(order);
-                Order ord = await _orderService.AddOrder(o);
-                return CreatedAtAction(nameof(Get), new { id = ord.OrderId }, ord);
+                Order newOrder = await _orderService.AddOrder(o);
+                OrderDTO newOrderDto = _mapper.Map<Order, OrderDTO>(newOrder);
+                return CreatedAtAction(nameof(Get), new { id = newOrder.OrderId }, newOrderDto);
             }
             catch (Exception ex)
             {
