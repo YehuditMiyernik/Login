@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class CategoryDTO
+    public class UserLoginDTO
     {
-        public string CategoryName { get; set; } = null!;
-        [Required]
-        public string Password { get; set; } = null!;
+        public string UserName { get; set; }
+
+        public string Password { get; set; }
     }
 }

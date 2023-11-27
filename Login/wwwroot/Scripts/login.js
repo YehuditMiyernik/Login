@@ -5,15 +5,17 @@
 
 const login = async () => {
     try {
-        const userName = document.getElementById("userName").value
-        const password = document.getElementById("password").value
+        const UserName = document.getElementById("userName").value
+        const Password = document.getElementById("password").value
+        const user = { UserName, Password }
 
-        const res = await fetch(`/api/users?userName=${userName}&password=${password}`,
+        const res = await fetch(`/api/users/login`,
             {
-                method: 'GET',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                body: JSON.stringify(user)
             });
         if (!res.ok) {
             if (res.status == 401)

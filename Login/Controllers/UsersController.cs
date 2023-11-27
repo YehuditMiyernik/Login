@@ -1,4 +1,6 @@
-﻿using Entities;
+﻿using AutoMapper;
+using DTO;
+using Entities;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
@@ -12,19 +14,21 @@ namespace MyFirstWebApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        //private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            //_mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<User>> Get([FromQuery] string userName, [FromQuery] string password)
+        [HttpPost("login")]
+        public async Task<ActionResult<User>> Get([FromBody] UserLoginDTO user)
         {
-            User user = await _userService.GetUserByEmailAndPassword(userName, password);
+            User userlogin = await _userService.GetUserByEmailAndPassword(user.UserName, user.Password);
             if(user == null)
                 return NoContent();
-            return Ok(user);     
+            return Ok(userlogin);     
         }
 
         [HttpGet("{id}")]
@@ -42,7 +46,7 @@ namespace MyFirstWebApi.Controllers
             try
             {
                 User newUser = await _userService.AddUser(user);
-                if(newUser == null)
+                if (newUser == null)
                 {
                     return StatusCode(500);
                 }
