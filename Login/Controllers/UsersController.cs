@@ -26,9 +26,9 @@ namespace MyFirstWebApi.Controllers
         public async Task<ActionResult<UserDTO>> Get([FromBody] UserLoginDTO user)
         {
             User userlogin = await _userService.GetUserByEmailAndPassword(user.UserName, user.Password);
-            UserDTO userDTO = _mapper.Map<User, UserDTO>(userlogin);
-            if(user == null)
+            if(userlogin == null)
                 return NoContent();
+            UserDTO userDTO = _mapper.Map<User, UserDTO>(userlogin);
             return Ok(userDTO);     
         }
 

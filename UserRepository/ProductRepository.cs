@@ -27,4 +27,10 @@ public class ProductRepository : IProductRepository
         List<Product> products = await query.ToListAsync();
         return products;
     }
+
+    public async Task<List<Product>> GetAllProducts()
+    {   
+        List<Product> products = await _Store325574630Context.Products.ToListAsync();
+        return products;
+    }
 }

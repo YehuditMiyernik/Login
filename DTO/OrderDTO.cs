@@ -15,5 +15,7 @@ namespace DTO
         public int OrderSum { get; set; }
 
         public int UserId { get; set; }
+        public virtual IEnumerable<OrderItemDTO> OrderItems { get; set; } = new List<OrderItemDTO>();
+
     }
 }
