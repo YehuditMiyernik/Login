@@ -14,9 +14,9 @@ namespace Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly Store325574630Context _Store325574630Context;
-    public UserRepository()
+    public UserRepository(Store325574630Context store325574630Context)
     {
-        _Store325574630Context = new Store325574630Context();
+        _Store325574630Context = store325574630Context;
     }
 
     public async Task<User> GetUserByEmailAndPassword(string email, string password)

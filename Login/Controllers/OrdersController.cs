@@ -17,13 +17,7 @@ namespace MyFirstWebApi.Controllers
         {
             _orderService = orderService;
             _mapper = mapper;
-        }
-
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+        } 
 
         [HttpPost]
         public async Task<ActionResult<Order>> Post([FromBody] OrderDTO order)
@@ -33,7 +27,7 @@ namespace MyFirstWebApi.Controllers
                 Order o = _mapper.Map<OrderDTO,Order>(order);
                 Order newOrder = await _orderService.AddOrder(o);
                 OrderDTO newOrderDTO = _mapper.Map<Order, OrderDTO>(newOrder);
-                return CreatedAtAction(nameof(Get), new { id = newOrder.OrderId }, newOrderDTO);
+                return CreatedAtAction(nameof(Post), new { id = newOrder.OrderId }, newOrderDTO);
             }
             catch (Exception ex)
             {

@@ -4,6 +4,7 @@ using Entities;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
+using PresidentsApp.Middlewares;
 using Services;
 using System.Text.Json;
 
@@ -15,11 +16,15 @@ namespace MyFirstWebApi.Controllers
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly ILogger<UsersController> _logger;
+        //private readonly ErrorHandlingMiddleware _errorHandlingMiddleware;
 
-        public UsersController(IUserService userService, IMapper mapper)
+        public UsersController(IUserService userService, IMapper mapper, ILogger<UsersController> logger)
         {
             _userService = userService;
             _mapper = mapper;
+            _logger = logger;
+            ///_errorHandlingMiddleware = errorHandlingMiddleware;
         }
 
         [HttpPost("login")]
@@ -29,6 +34,7 @@ namespace MyFirstWebApi.Controllers
             if(userlogin == null)
                 return NoContent();
             UserDTO userDTO = _mapper.Map<User, UserDTO>(userlogin);
+            _logger.LogInformation($"Login attempted with User Name {userDTO.UserName.Trim()} and password {userDTO.Password.Trim()}");
             return Ok(userDTO);     
         }
 
@@ -48,6 +54,8 @@ namespace MyFirstWebApi.Controllers
             User user = _mapper.Map<UserDTO, User>(userDTO);
             try
             {
+                //int z = 0;
+                //int err = 8 / z;
                 User newUser = await _userService.AddUser(user);
                 if (newUser == null)
                 {

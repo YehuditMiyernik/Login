@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.Extensions.Logging;
 using Repositories;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,23 @@ public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IProductRepository _productRepository;
+    private readonly ILogger<OrderService> _logger;
 
-    public OrderService(IOrderRepository orderRepository, IProductRepository productRepository)
+    public OrderService(IOrderRepository orderRepository, IProductRepository productRepository, ILogger<OrderService> logger)
     {
         _orderRepository = orderRepository;
         _productRepository = productRepository;
+        _logger = logger;
     }
 
     public async Task<Order> AddOrder(Order order)
     {
-        order.OrderSum = CalculatePrice(order.OrderItems).Result;
+        int price = CalculatePrice(order.OrderItems).Result;
+        if(order.OrderSum != price)
+        {
+            _logger.LogInformation($"user {order.UserId} tried to steal");
+            order.OrderSum = price;
+        }
         return await _orderRepository.AddOrder(order);
     }
 
@@ -36,7 +44,6 @@ public class OrderService : IOrderService
             {
                 price += prod.Price * item.Quantity;
             }
-            //price += products.Find(p => p.Id == item.Id).Price * item.Quantity;
         }
         return price;
 

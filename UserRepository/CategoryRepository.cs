@@ -12,9 +12,9 @@ namespace Repositories;
 public class CategoryRepository : ICategoryRepository
 {
     private readonly Store325574630Context _Store325574630Context;
-    public CategoryRepository()
+    public CategoryRepository(Store325574630Context store325574630Context)
     {
-        _Store325574630Context = new Store325574630Context();
+        _Store325574630Context = store325574630Context;
     }
     public async Task<List<Category>> getAllCategories()
     {

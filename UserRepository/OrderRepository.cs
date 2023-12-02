@@ -10,9 +10,9 @@ namespace Repositories;
 public class OrderRepository : IOrderRepository
 {
     private readonly Store325574630Context _Store325574630Context;
-    public OrderRepository()
+    public OrderRepository(Store325574630Context store325574630Context)
     {
-        _Store325574630Context = new Store325574630Context();
+        _Store325574630Context = store325574630Context;
     }
 
     public async Task<Order> AddOrder(Order order)

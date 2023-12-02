@@ -46,6 +46,7 @@ const displayCategories = (categories) => {
 }
 
 const getProducts = async (url) => {
+    console.log(url);
     try {
         const res = await fetch('api/Products'+url,
             {
@@ -100,6 +101,7 @@ const displayProducts = (products) => {
 
 const filterProducts = async () => {
     const checkboxArray = document.getElementsByClassName("opt");
+    console.log(checkboxArray);
     const desc = document.getElementById("nameSearch").value;
     const minPrice = document.getElementById("minPrice").value;
     const maxPrice = document.getElementById("maxPrice").value;
@@ -109,7 +111,8 @@ const filterProducts = async () => {
         if (checkboxArray[i].checked) {
             url += "&categoryIds=" + checkboxArray[i].id;
         }
-    }
+    } 
+    console.log(url);
     const products = await getProducts(url);
     displayProducts(products);
 }

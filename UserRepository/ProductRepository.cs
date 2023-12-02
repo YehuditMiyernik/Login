@@ -11,9 +11,9 @@ namespace Repositories;
 public class ProductRepository : IProductRepository
 {
     private readonly Store325574630Context _Store325574630Context;
-    public ProductRepository()
+    public ProductRepository(Store325574630Context store325574630Context)
     {
-        _Store325574630Context = new Store325574630Context();
+        _Store325574630Context = store325574630Context;
     }
     public async Task<List<Product>> GetAllProducts(string? desc, int? minPrice, int? maxPrice, int?[] categoryIds)
     {
