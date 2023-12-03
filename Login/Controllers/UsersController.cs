@@ -17,18 +17,16 @@ namespace MyFirstWebApi.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly ILogger<UsersController> _logger;
-        //private readonly ErrorHandlingMiddleware _errorHandlingMiddleware;
 
         public UsersController(IUserService userService, IMapper mapper, ILogger<UsersController> logger)
         {
             _userService = userService;
             _mapper = mapper;
             _logger = logger;
-            ///_errorHandlingMiddleware = errorHandlingMiddleware;
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDTO>> Get([FromBody] UserLoginDTO user)
+        public async Task<ActionResult<UserDTO>> Post([FromBody] UserLoginDTO user)
         {
             User userlogin = await _userService.GetUserByEmailAndPassword(user.UserName, user.Password);
             if(userlogin == null)
@@ -63,12 +61,12 @@ namespace MyFirstWebApi.Controllers
                 }
                 UserDTO userToReturn = _mapper.Map<User, UserDTO>(user);
                 return CreatedAtAction(nameof(Get), new { id = user.Id }, userToReturn);
-            }
+        }
             catch (Exception ex)
             {
                 return StatusCode(500);
-            }
-        }
+    }
+}
 
         [Route("pwd")]
         [HttpPost]

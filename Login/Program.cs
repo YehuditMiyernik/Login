@@ -4,6 +4,7 @@ using Services;
 using Microsoft.Extensions.Configuration;
 using NLog.Web;
 using PresidentsApp.Middlewares;
+using MyFirstWebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductService, ProductService>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IRatingRepository, RatingRepository>();
+builder.Services.AddTransient<IRatingService, RatingService>();
 builder.Services.AddDbContext<Store325574630Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Store")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -33,7 +36,6 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configure the HTTP request pipeline.
-//app.UseErrorHandlingMiddleware();
 
 app.UseHttpsRedirection();
 
@@ -42,5 +44,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseStaticFiles();
+
+app.UseRatingMiddleware();
+
+//app.UseErrorHandlingMiddleware();
 
 app.Run();
