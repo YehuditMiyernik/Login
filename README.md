@@ -1,7 +1,7 @@
 # First Web-Api Project
 The project we built is a store website for household and kitchenware.
 ## Description
-The project includes a secure login and registration system. We tested password strength using the ZXCVBN library. After logging in, you can update the user information and go to the products page where you can filter the products and add products to the cart. On the basket page you can remove products and place an order.
+The project includes a secure login and registration system. We test password strength using the ZXCVBN library. After logging in, you can update the user information and go to the products page where you can filter the products and add products to the cart. On the basket page you can remove products and place an order.
 ## How to use
 The project should be run using VS 2022 and above.
 SQL DB. You can use the ability of code first by running these commands in the Package Managment Console:
