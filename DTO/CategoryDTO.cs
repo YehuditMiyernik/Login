@@ -11,6 +11,6 @@ namespace DTO
     {
         public string CategoryName { get; set; } = null!;
         [Required]
-        public string Password { get; set; } = null!;
+        public string Id { get; set; } = null!;
     }
 }

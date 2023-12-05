@@ -22,6 +22,7 @@ public class ProductRepository : IProductRepository
         && ((minPrice == null) ? (true) : (product.Price >= minPrice))
         && ((maxPrice == null) ? (true) : (product.Price <= maxPrice))
         && ((categoryIds.Length == 0) ? (true) : (categoryIds.Contains(product.CategoryId))))
+            .Include(i => i.Category)
             .OrderBy(Product => Product.Price);
         Console.WriteLine(query.ToQueryString());
         List<Product> products = await query.ToListAsync();
