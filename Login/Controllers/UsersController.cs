@@ -4,7 +4,6 @@ using Entities;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Session;
-using PresidentsApp.Middlewares;
 using Services;
 using System.Text.Json;
 
@@ -52,8 +51,6 @@ namespace MyFirstWebApi.Controllers
             User user = _mapper.Map<UserDTO, User>(userDTO);
             try
             {
-                //int z = 0;
-                //int err = 8 / z;
                 User newUser = await _userService.AddUser(user);
                 if (newUser == null)
                 {
@@ -61,11 +58,11 @@ namespace MyFirstWebApi.Controllers
                 }
                 UserDTO userToReturn = _mapper.Map<User, UserDTO>(user);
                 return CreatedAtAction(nameof(Get), new { id = user.Id }, userToReturn);
-        }
+            }
             catch (Exception ex)
             {
                 return StatusCode(500);
-    }
+            }
 }
 
         [Route("pwd")]

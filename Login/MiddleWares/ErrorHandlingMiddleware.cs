@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
-
-namespace PresidentsApp.Middlewares
+﻿namespace MyFirstWebApi.Middlewares
 {
     // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class ErrorHandlingMiddleware
@@ -20,7 +16,7 @@ namespace PresidentsApp.Middlewares
             {
                 await _next(httpContext);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 _logger.LogError($"Logged From My Middleware {e.Message}  {e.StackTrace}");
                 httpContext.Response.StatusCode = 500;

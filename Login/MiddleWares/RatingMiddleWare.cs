@@ -1,5 +1,4 @@
 ﻿using Entities.Models;
-using PresidentsApp.Middlewares;
 using Services;
 
 namespace MyFirstWebApi.Middlewares
@@ -12,18 +11,18 @@ namespace MyFirstWebApi.Middlewares
         {
             _next = next;
         }
-        public async Task Invoke(HttpContext httpContext, IRatingService ratingService)
+        public async Task<Task> Invoke(HttpContext httpContext, IRatingService ratingService)
         {
             _ratingService = ratingService;
             Rating rating = new Rating();
-            //rating.Host = httpContext.Request.Host.ToString();
-            //rating.Method = httpContext.Request.Method;
-            //rating.Path = httpContext.Request.Path;
-            //rating.Referer = httpContext.Request.Protocol + httpContext.Request.Host;
-            //rating.UserAgent = httpContext.Session.Id.ToString();
-            //rating.RecordDate = new DateTime();
-            rating.Host = "yehudit";
+            rating.Host = httpContext.Request.Host.ToString();
+            rating.Method = httpContext.Request.Method;
+            rating.Path = httpContext.Request.Path;
+            rating.Referer = httpContext.Request.Host + httpContext.Request.Protocol;
+            rating.UserAgent = httpContext.Request.Headers["User-Agent"];
+            rating.RecordDate = DateTime.Now;
             await _ratingService.AddRating(rating);
+            return _next(httpContext);
         }
     }
     public static class RatingMiddlewareExtentions

@@ -18,9 +18,9 @@ const login = async () => {
                 body: JSON.stringify(user)
             });
         if (!res.ok) {
-            if (res.status == 401)
+            if (res.status == 204)
                 alert("userName or password are invalid");
-            throw new Error("wrong name or password!")
+            throw new Error("Error occurred")
         }
         else {
             const user = await res.json();

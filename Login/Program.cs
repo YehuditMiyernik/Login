@@ -3,7 +3,6 @@ using Repositories;
 using Services;
 using Microsoft.Extensions.Configuration;
 using NLog.Web;
-using PresidentsApp.Middlewares;
 using MyFirstWebApi.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +35,9 @@ if (app.Environment.IsDevelopment())
 }
 
 // Configure the HTTP request pipeline.
+app.UseRatingMiddleware();
+
+app.UseErrorHandlingMiddleware();
 
 app.UseHttpsRedirection();
 
@@ -44,9 +46,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseStaticFiles();
-
-app.UseRatingMiddleware();
-
-//app.UseErrorHandlingMiddleware();
 
 app.Run();
