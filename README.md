@@ -6,8 +6,10 @@ The project includes a secure login and registration system. We tested password 
 The project should be run using VS 2022 and above.
 SQL DB. You can use the ability of code first by running these commands in the Package Managment Console:
 ```bash
-add-migration store_214493777
-Udate-Database
+add-migration Store325574630
+```
+```bash
+Update-Database
 ```
 ## Structure
 The project is a Web-Api project written in .NET 7.0. 
